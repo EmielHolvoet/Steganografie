@@ -48,5 +48,23 @@ namespace SteganografieIT
 
             }
         }
+                private void ConvertMessage(string msg)
+        {
+            char[] test = msg.ToCharArray();
+            BitArray bitarray = new BitArray(8); ;
+            for (int i = 0; i < msg.Length; i++)
+            {
+                BitArray b = new BitArray(new byte[] { Convert.ToByte(msg[i]) });
+                bool[] bits = new bool[b.Count];
+                b.CopyTo(bits, 0);
+                byte[] bitValues = bits.Select(bit => (byte)(bit ? 1 : 0)).ToArray();
+                //ConsoleWritelines are optional, cunt
+                for (int j = 0; j < 8; j++)
+                {
+                    Console.Write(bitValues[j]);                   
+                }
+                Console.WriteLine();
+            }
+        }
     }
 }
